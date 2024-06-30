@@ -1,9 +1,12 @@
 <template>
     <div class="cart-container">
         <h3>DATE: <span>{{formattedDate}}</span></h3>
-        <cart-list v-for="product in products" 
+        <cart-list v-for="product in products"
             :key="product.productId"
-            :id="product.productId"
+            :id="product.id"
+            :image="product.image"
+            :title="product.title"
+            :price="product.price"
             :quantity="product.quantity"
         ></cart-list>
     </div>
@@ -22,7 +25,7 @@ export default{
                 year: 'numeric',
                 month: '2-digit',
                 day: '2-digit'
-            })
+            });
             return formatted;
         }
     }

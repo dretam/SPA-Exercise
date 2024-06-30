@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
+
 export default{
     props: ['productId'],
     data() {
@@ -44,8 +46,17 @@ export default{
         };
     },
     async created(){
+        Swal.fire({
+            title: 'Loading...',
+            text: 'Please wait while we process this product detail.',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
         await this.$store.dispatch('product/fetchDetail', this.productId);
         this.product = this.$store.getters['product/getOneDetail'](this.productId);
+        Swal.close();
     }
 }
 </script>

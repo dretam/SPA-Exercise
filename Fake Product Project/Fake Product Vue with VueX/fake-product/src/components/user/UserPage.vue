@@ -15,6 +15,7 @@
 
 <script>
 import UserList from './UserList.vue';
+import Swal from 'sweetalert2';
 
 export default{
     components: {UserList},
@@ -24,8 +25,17 @@ export default{
         }
     },
     async created(){
+        Swal.fire({
+            title: 'Loading...',
+            text: 'Please wait while we process users data.',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
         await this.$store.dispatch('user/fetchUsers');
         this.users = this.$store.getters['user/getUsers'];
+        Swal.close();
     }
 }
 </script>

@@ -1,13 +1,13 @@
 <template>
     <main class="cart-main">
         <user-card class="cart-header"
-            :name="user.name"
+            :name="user.userFullName"
             :username="user.username"
             :email="user.email">
             <base-capsule-button :isLink="true" :link="`/users`">Back</base-capsule-button>
         </user-card>
 
-        <cart-group-container v-for="cart in carts"
+        <cart-group-container v-for="cart in user.carts"
             :key="cart.id"
             :id="cart.id"
             :date="cart.date"
@@ -19,6 +19,7 @@
 <script>
 import UserCard from './UserCard.vue';
 import CartGroupContainer from './CartGroupContainer.vue';
+import Swal from 'sweetalert2';
 
 export default{
     components: {UserCard, CartGroupContainer},
@@ -29,10 +30,17 @@ export default{
         }
     },
     async created(){
+        Swal.fire({
+            title: 'Loading...',
+            text: 'Please wait while we process this user cart.',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
         await this.$store.dispatch('cart/fetchCart', this.userId);
-        this.user = this.$store.getters['cart/getOne']
-        this.getUser();
-        this.getCartDetail();
+        this.user = this.$store.getters['cart/getOne'](this.userId);
+        Swal.close();
     }
 }
 </script>

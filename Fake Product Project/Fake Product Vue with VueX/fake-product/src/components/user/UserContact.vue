@@ -41,6 +41,8 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
+
 export default{
     props:['userId'],
     data() {
@@ -49,8 +51,17 @@ export default{
         }
     },
     async created(){
+        Swal.fire({
+            title: 'Loading...',
+            text: 'Please wait while we process this user contact.',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
         await this.$store.dispatch('user/fetchContact', this.userId);
         this.contact = this.$store.getters['user/getOneContact'](this.userId);
+        Swal.close();
     },
     methods: {
         closeDialog(){

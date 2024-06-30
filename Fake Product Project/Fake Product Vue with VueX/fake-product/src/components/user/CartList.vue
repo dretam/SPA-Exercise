@@ -20,21 +20,7 @@
 
 <script>
 export default{
-    props:['id', 'quantity'],
-    data(){
-        return {
-            image:'',
-            title:'',
-            price:0
-        }
-    },
-    async created(){
-        const promise = await fetch(`https://fakestoreapi.com/products/${this.id}`);
-        const {image, title, price} = await promise.json();
-        this.image = image;
-        this.title = title;
-        this.price = price;
-    },
+    props:['id', 'quantity', 'image', 'title', 'price'],
     computed: {
         totalPrice(){
             return this.quantity * this.price;

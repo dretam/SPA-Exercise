@@ -14,6 +14,7 @@
 
 <script>
 import ProductCard from './ProductCard.vue';
+import Swal from 'sweetalert2';
 
 export default{
     components: {ProductCard},
@@ -23,8 +24,17 @@ export default{
         };
     },
     async created(){
+        Swal.fire({
+            title: 'Loading...',
+            text: 'Please wait while we process products data.',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
         await this.$store.dispatch('product/fetchProducts');
         this.products = this.$store.getters['product/getProducts'];
+        Swal.close();
     }
 }
 </script>
