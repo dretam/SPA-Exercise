@@ -7,7 +7,7 @@ export default{
     },
     getOneContact(state){
         return function(id){
-            return state.contacts.find(contact => contact.id == id)
+            return state.contacts.find(contact => contact.id == id);
         };
     },
     anyContact(state){
