@@ -38,7 +38,7 @@
 <script>
 import Swal from 'sweetalert2';
 import {ref, onBeforeMount} from 'vue';
-import {useStore} from 'vuex';
+import useStore from '../../store/product/product-store.js';
 
 export default{
     props: ['productId'],
@@ -54,8 +54,8 @@ export default{
                     Swal.showLoading();
                 }
             });
-            await store.dispatch('product/fetchDetail', props.productId);
-            product.value = store.getters['product/getOneDetail'](props.productId);
+            await store.fetchDetail(props.productId);
+            product.value = store.getOneDetail(props.productId);
             Swal.close();
         });
         return {product};

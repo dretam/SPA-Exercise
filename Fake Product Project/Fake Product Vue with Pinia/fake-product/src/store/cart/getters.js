@@ -1,12 +1,12 @@
 export default{
-    getOne(state){
+    getOne(){
         return function(id){
-            return state.users.find(user => user.userId == id);
+            return this.users.find(user => user.userId == id);
         };
     },
-    anyUser(state){
+    anyUser(){
         return function(id){
-            return state.users.some(user => user.userId == id);
+            return this.users.some(user => user.userId == id);
         };
     }
 }

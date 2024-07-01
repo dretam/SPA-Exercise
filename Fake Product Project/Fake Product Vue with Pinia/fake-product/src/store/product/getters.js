@@ -1,18 +1,15 @@
 export default{
-    getProducts(state){
-        return state.products;
+    countProducts(){
+        return this.products.length;
     },
-    countProducts(state){
-        return state.products.length;
-    },
-    getOneDetail(state){
+    getOneDetail(){
         return function(id){
-            return state.details.find(detail => detail.id == id);
-        };
+            return this.details.find(detail => detail.id == id);
+        }
     },
-    anyDetail(state){
+    anyDetail(){
         return function(id){
-            return state.details.some(detail => detail.id == id);
-        };
+            return this.details.some(detail => detail.id == id);
+        }
     }
 }

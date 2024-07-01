@@ -17,7 +17,7 @@
 import UserList from './UserList.vue';
 import Swal from 'sweetalert2';
 import {ref, onBeforeMount} from 'vue';
-import {useStore} from 'vuex';
+import useStore from '../../store/user/user-store.js';
 
 export default{
     components: {UserList},
@@ -33,8 +33,8 @@ export default{
                     Swal.showLoading();
                 }
             });
-            await store.dispatch('user/fetchUsers');
-            users.value = store.getters['user/getUsers'];
+            await store.fetchUsers();
+            users.value = store.users;
             Swal.close();
         })
         return {users};

@@ -21,7 +21,7 @@ import UserCard from './UserCard.vue';
 import CartGroupContainer from './CartGroupContainer.vue';
 import Swal from 'sweetalert2';
 import {ref, onBeforeMount} from 'vue';
-import {useStore} from 'vuex';
+import useStore from '../../store/cart/cart-store.js';
 
 export default{
     components: {UserCard, CartGroupContainer},
@@ -38,8 +38,8 @@ export default{
                     Swal.showLoading();
                 }
             });
-            await store.dispatch('cart/fetchCart', props.userId);
-            user.value = store.getters['cart/getOne'](props.userId);
+            await store.fetchCart(props.userId);
+            user.value = store.getOne(props.userId);
             Swal.close();
         });
         return {user};

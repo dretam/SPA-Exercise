@@ -16,7 +16,7 @@
 import ProductCard from './ProductCard.vue';
 import Swal from 'sweetalert2';
 import {ref, onBeforeMount} from 'vue';
-import {useStore} from 'vuex';
+import useStore from '../../store/product/product-store.js';
 
 export default{
     components: {ProductCard},
@@ -32,8 +32,8 @@ export default{
                     Swal.showLoading();
                 }
             });
-            await store.dispatch('product/fetchProducts');
-            products.value = store.getters['product/getProducts'];
+            await store.fetchProducts();
+            products.value = store.products;
             Swal.close();
         });
         return {products};

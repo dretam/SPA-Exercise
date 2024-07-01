@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export default{
-    async fetchCart(context, selectedId){
-        if(context.getters.anyUser(selectedId)){
+    async fetchCart(selectedId){
+        if(this.anyUser(selectedId)){
             return;
         }
         let user = { carts: [] };
@@ -22,12 +22,12 @@ export default{
                 date: dataCart.date,
                 products: dataCart.products
             }
-            await context.dispatch('joinProducts', cart.products);
+            await this.joinProducts(cart.products);
             user.carts.push(cart);
         }
-        context.commit('addUser', user);
+        this.users.push(user);
     },
-    async joinProducts(_, products){
+    async joinProducts(products){
         for(let product of products){
             const productResponse = await axios.get(`/products/${product.productId}`);
             const {image, title, price} = productResponse.data;

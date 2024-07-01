@@ -1,7 +1,6 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router.js';
-//import store from './store/index.js';
 import axios from 'axios';
 import { createPinia } from 'pinia'
 
@@ -20,7 +19,7 @@ axios.defaults.baseURL = 'https://fakestoreapi.com/';
 
 const app = createApp(App);
 app.use(router);
-//app.use(store);
+
 const pinia = createPinia();
 app.use(pinia);
 

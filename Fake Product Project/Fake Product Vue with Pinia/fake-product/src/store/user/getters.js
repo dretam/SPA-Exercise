@@ -1,18 +1,15 @@
 export default{
-    getUsers(state){
-        return state.users;
+    countUsers(){
+        return this.users.length;
     },
-    countUsers(state){
-        return state.users.length;
-    },
-    getOneContact(state){
+    getOneContact(){
         return function(id){
-            return state.contacts.find(contact => contact.id == id)
-        };
+            return this.contacts.find(contact => contact.id == id);
+        }
     },
-    anyContact(state){
+    anyContact(){
         return function(id){
-            return state.contacts.some(contact => contact.id == id);
-        };
+            return this.contacts.some(contact => contact.id == id);
+        }
     }
 }

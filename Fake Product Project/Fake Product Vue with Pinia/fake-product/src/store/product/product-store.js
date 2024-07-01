@@ -1,16 +1,16 @@
-import mutations from './mutations.js';
+import {defineStore} from 'pinia';
 import actions from './actions.js';
 import getters from './getters.js';
 
-export default{
-    namespaced: true,
-    state: function(){
+const useProductStore = defineStore('productStore', {
+    state(){
         return{
             products: [],
             details: []
         }
     },
-    mutations,
     actions,
     getters
-}
+});
+
+export default useProductStore;

@@ -43,7 +43,7 @@
 <script>
 import Swal from 'sweetalert2';
 import {ref, onBeforeMount} from 'vue';
-import {useStore} from 'vuex';
+import useStore from '../../store/user/user-store.js';
 import {useRouter} from 'vue-router'
 
 export default{
@@ -62,8 +62,8 @@ export default{
                     Swal.showLoading();
                 }
             });
-            await store.dispatch('user/fetchContact', props.userId);
-            contact.value = store.getters['user/getOneContact'](props.userId);
+            await store.fetchContact(props.userId);
+            contact.value = store.getOneContact(props.userId);
             Swal.close();
         })
 
