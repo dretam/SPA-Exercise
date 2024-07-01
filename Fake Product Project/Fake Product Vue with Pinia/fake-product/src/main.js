@@ -1,8 +1,9 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router.js';
-import store from './store/index.js';
+//import store from './store/index.js';
 import axios from 'axios';
+import { createPinia } from 'pinia'
 
 import './assets/css/normalize.css';
 import './assets/css/all.css';
@@ -19,7 +20,9 @@ axios.defaults.baseURL = 'https://fakestoreapi.com/';
 
 const app = createApp(App);
 app.use(router);
-app.use(store);
+//app.use(store);
+const pinia = createPinia();
+app.use(pinia);
 
 app.component('base-capsule-button', BaseCapsuleButton);
 app.component('base-full-button', BaseFullButton);
